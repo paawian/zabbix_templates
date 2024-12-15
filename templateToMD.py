@@ -30,12 +30,13 @@ def translate_data_type(data_type):
     }
     return data_types.get(data_type, "Unknown")
 
-# Escape Markdown special characters
+# Escape Markdown special characters only when necessary
 def escape_markdown(text):
     if not text:
         return ""
-    # Escape Markdown special characters
-    return re.sub(r"([\\`*_{}\[\]()#+-.!|>])", r"\\\\\1", text)
+    # Escape only characters that interfere with Markdown formatting
+    return re.sub(r"([`*_{}\\[\\]()#+-.!|>])", r"\\\1", text)
+
 
 # Function to resolve item keys in trigger expressions
 def resolve_expression(expression, items):
