@@ -1,7 +1,6 @@
 import argparse
 import os
 import requests
-import markdown
 
 def fetch_templates(api_url, token):
     """Fetch templates from Zabbix API."""
@@ -13,6 +12,7 @@ def fetch_templates(api_url, token):
         "method": "template.get",
         "params": {
             "output": "extend",
+            "selectItems": ["name", "description", "delay", "value_type"]
         },
         "auth": token,
         "id": 1
@@ -43,7 +43,16 @@ def generate_markdown(template):
 ## Linked Hosts
 {', '.join(template.get('hosts', [])) if 'hosts' in template else 'None'}
 
+## Items
+
 """
+    if 'items' in template:
+        for item in template['items']:
+            md += f"### Item: {item['name']}\n"
+            md += f"- **Description**: {item.get('description', 'No description provided.')}\n"
+            md += f"- **Interval**: {item.get('delay', 'N/A')}\n"
+            md += f"- **Data Type**: {item.get('value_type', 'N/A')}\n\n"
+
     return md
 
 def save_markdown(content, output_dir, filename):
