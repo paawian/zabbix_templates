@@ -37,11 +37,16 @@ def escape_markdown(text):
     # Escape only characters that interfere with Markdown formatting
     return re.sub(r"([`*_{}\\[\\]()#+-.!|>])", r"\\\1", text)
 
-
 # Function to resolve item keys in trigger expressions
 def resolve_expression(expression, items):
-    for item in items:
-        expression = expression.replace(f"{item['itemid']}", item['key_'])
+    # Build a dictionary of item IDs to their keys
+    item_map = {item["itemid"]: item["key_"] for item in items}
+    
+    # Replace all item IDs in the expression with their corresponding keys
+    for item_id, item_key in item_map.items():
+        # Match item IDs embedded within curly braces
+        expression = re.sub(rf"\{{{item_id}\}}", item_key, expression)
+    
     return expression
 
 # Function to generate Markdown documentation for a template
