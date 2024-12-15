@@ -95,7 +95,7 @@ def return_content_string(content):
         return str(content)
 
 
-def generate_list(items=[], keys=["name", "key"]):
+def generate_list(items=[], keys=["name", "key", "type"]):
     """Generate a list based on given data.
 
     Args:
@@ -138,11 +138,11 @@ def main(file):
 
         # Items part
         if "items" in template:
-            items_dict = generate_list(template["items"], keys=["name", "description", "key", "delay"])
+            items_dict = generate_list(template["items"], keys=["name", "description", "key", "type", "delay"])
 
-            #for i in items_dict:
-             #   if i["type"] in zabbix_items_types:
-              #      i["type"] = zabbix_items_types[i["type"]]
+            for i in items_dict:
+                if i["type"] in zabbix_items_types:
+                    i["type"] = zabbix_items_types[i["type"]]
             
             # Extract triggers from items
             for i in template["items"]:
