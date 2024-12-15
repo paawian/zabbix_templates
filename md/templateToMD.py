@@ -35,7 +35,7 @@ def escape_markdown(text):
     if not text:
         return ""
     # Escape Markdown special characters
-    return re.sub(r"([\\`*_{}\[\]()#+-.!|>])", r"\\\\\1", text)
+    return re.sub(r"([\\`*_{}\[\]()#+-.!|>])", r"\\\1", text)
 
 # Function to resolve item keys in trigger expressions
 def resolve_expression(expression, items):
