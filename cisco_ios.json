@@ -17,140 +17,17 @@
                     "name": "Zabbix",
                     "version": "7.0-0"
                 },
+                "templates": [
+                    {
+                        "name": "ICMP Ping"
+                    }
+                ],
                 "groups": [
                     {
                         "name": "Templates/Network devices"
                     }
                 ],
                 "items": [
-                    {
-                        "uuid": "f0a3f0b82e32488aa22929fe035825cb",
-                        "name": "ICMP ping",
-                        "type": "SIMPLE",
-                        "key": "icmpping",
-                        "history": "7d",
-                        "valuemap": {
-                            "name": "Service state"
-                        },
-                        "tags": [
-                            {
-                                "tag": "component",
-                                "value": "health"
-                            },
-                            {
-                                "tag": "component",
-                                "value": "network"
-                            }
-                        ],
-                        "triggers": [
-                            {
-                                "uuid": "77e52d690bc043e389ad8d705dbb86b9",
-                                "expression": "max(/Cisco IOS by SNMP/icmpping,#3)=0",
-                                "name": "Unavailable by ICMP ping",
-                                "priority": "HIGH",
-                                "description": "Last three attempts returned timeout.  Please check device connectivity.",
-                                "tags": [
-                                    {
-                                        "tag": "scope",
-                                        "value": "availability"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "uuid": "0c081f94e6094ad29e1fbc2a3424bedb",
-                        "name": "ICMP loss",
-                        "type": "SIMPLE",
-                        "key": "icmppingloss",
-                        "history": "7d",
-                        "value_type": "FLOAT",
-                        "units": "%",
-                        "tags": [
-                            {
-                                "tag": "component",
-                                "value": "health"
-                            },
-                            {
-                                "tag": "component",
-                                "value": "network"
-                            }
-                        ],
-                        "triggers": [
-                            {
-                                "uuid": "62b3c0a2654f4372a1bad40a0fd2898d",
-                                "expression": "min(/Cisco IOS by SNMP/icmppingloss,5m)>{$ICMP_LOSS_WARN} and min(/Cisco IOS by SNMP/icmppingloss,5m)<100",
-                                "name": "High ICMP ping loss",
-                                "opdata": "Loss: {ITEM.LASTVALUE1}",
-                                "priority": "WARNING",
-                                "dependencies": [
-                                    {
-                                        "name": "Unavailable by ICMP ping",
-                                        "expression": "max(/Cisco IOS by SNMP/icmpping,#3)=0"
-                                    }
-                                ],
-                                "tags": [
-                                    {
-                                        "tag": "scope",
-                                        "value": "availability"
-                                    },
-                                    {
-                                        "tag": "scope",
-                                        "value": "performance"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "uuid": "dab9ef1df04d403faa4910bf51559035",
-                        "name": "ICMP response time",
-                        "type": "SIMPLE",
-                        "key": "icmppingsec",
-                        "history": "7d",
-                        "value_type": "FLOAT",
-                        "units": "s",
-                        "tags": [
-                            {
-                                "tag": "component",
-                                "value": "health"
-                            },
-                            {
-                                "tag": "component",
-                                "value": "network"
-                            }
-                        ],
-                        "triggers": [
-                            {
-                                "uuid": "1ba34b5e344147d5b27431906037bc04",
-                                "expression": "avg(/Cisco IOS by SNMP/icmppingsec,5m)>{$ICMP_RESPONSE_TIME_WARN}",
-                                "name": "High ICMP ping response time",
-                                "opdata": "Value: {ITEM.LASTVALUE1}",
-                                "priority": "WARNING",
-                                "description": "Average ICMP response time is too high.",
-                                "dependencies": [
-                                    {
-                                        "name": "High ICMP ping loss",
-                                        "expression": "min(/Cisco IOS by SNMP/icmppingloss,5m)>{$ICMP_LOSS_WARN} and min(/Cisco IOS by SNMP/icmppingloss,5m)<100"
-                                    },
-                                    {
-                                        "name": "Unavailable by ICMP ping",
-                                        "expression": "max(/Cisco IOS by SNMP/icmpping,#3)=0"
-                                    }
-                                ],
-                                "tags": [
-                                    {
-                                        "tag": "scope",
-                                        "value": "availability"
-                                    },
-                                    {
-                                        "tag": "scope",
-                                        "value": "performance"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
                     {
                         "uuid": "a8734672a10d41c2ba7c1f00171bb93e",
                         "name": "Cisco IOS: SNMP walk EtherLike-MIB interfaces",
