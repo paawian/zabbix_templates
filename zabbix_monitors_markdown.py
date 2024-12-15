@@ -138,7 +138,7 @@ def main(file):
 
         # Items part
         if "items" in template:
-            items_dict = generate_list(template["items"], keys=["name", "description", "key", "type"])
+            items_dict = generate_list(template["items"], keys=["name", "description", "key", "type", "delay"])
 
             for i in items_dict:
                 if i["type"] in zabbix_items_types:
