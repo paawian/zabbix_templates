@@ -129,12 +129,18 @@ def main(file):
         template = obj["zabbix_export"]["templates"][0]
 
         # Init part
+        linked_templates_dict = []
         items_dict = []
         triggers_dict = []
         discovery_rules_items_dict = {}
         discovery_rules_triggers_dict = {}
         discovery_rules_dict = []
         macros_dict = []
+
+        # Linked templates part
+        linked_templates_dict = []
+        if "templates" in template:
+            linked_templates_dict = generate_list(template["templates"], keys=["name"])
 
         # Items part
         if "items" in template:
@@ -208,6 +214,8 @@ def main(file):
 
         # Summary
         print("## Summary")
+        if len(linked_templates_dict) > 0:
+            print("* [templates](#templates)")
         if len(items_dict) > 0:
             print("* [items](#items)")
         if len(macros_dict) > 0:
@@ -221,6 +229,12 @@ def main(file):
                     """  * [Discovery %s ](#discovery_%s)"""
                     % (d, d.lower().replace(" ", "_"))
                 )
+        
+        # Items
+        if len(linked_templates_dict) > 0:
+            print('\n<a name="linked templates" />\n')
+            print("## Linked Templates")
+            print(markdown_table(rows=linked_templates_dict))
 
         # Items
         if len(items_dict) > 0:
