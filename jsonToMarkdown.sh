@@ -5,5 +5,5 @@ for file in json/*.json; do
   filename=$(basename "$file" .json)
   
   # Run the script and redirect output to the md/ directory with the same filename but .md extension
-  python3 jsonToMarkdown.py --file "$file" > "md/${filename}.md"
+  python3 templateToMarkdown.py --file "$file" > "md/${filename}.md"
 done

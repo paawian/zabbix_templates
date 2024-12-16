@@ -42,6 +42,9 @@ def export_templates(api_url, api_key, output_path):
         template_name = template['name']
         print(f"Exporting template: {template_name} (ID: {template_id})")
 
+        # Replace spaces with underscores in the template name
+        sanitized_name = template_name.replace(" ", "_")
+
         # Export the template
         export_response = zabbix_request(api_url, api_key, "configuration.export", {
             "format": "json",
@@ -62,7 +65,7 @@ def export_templates(api_url, api_key, output_path):
             continue
 
         # Save the properly formatted JSON dictionary to a file
-        output_file = os.path.join(output_path, f"{template_name}.json")
+        output_file = os.path.join(output_path, f"{sanitized_name}.json")
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(json.dumps(exported_data, indent=4, ensure_ascii=False))
 

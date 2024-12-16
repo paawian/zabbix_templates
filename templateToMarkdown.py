@@ -232,31 +232,31 @@ def main(file):
         
         # Items
         if len(linked_templates_dict) > 0:
-            print('\n<a name="linked templates" />\n')
+            print('\n<a name="linked templates"></a>\n')
             print("## Linked Templates")
             print(markdown_table(rows=linked_templates_dict))
 
         # Items
         if len(items_dict) > 0:
-            print('\n<a name="items" />\n')
+            print('\n<a name="items"></a>\n')
             print("## Items")
             print(markdown_table(rows=items_dict))
 
         # Macros
         if len(macros_dict) > 0:
-            print('\n<a name="macros" />\n')
+            print('\n<a name="macros"></a>\n')
             print("## Macros")
             print(markdown_table(rows=macros_dict))
 
         # Triggers
         if len(triggers_dict) > 0:
-            print('\n<a name="triggers" />\n')
+            print('\n<a name="triggers"></a>\n')
             print("## Triggers")
             print(markdown_table(rows=triggers_dict))
 
         # Discovery
         if len(discovery_rules_dict) > 0:
-            print('\n<a name="discoveries" />\n')
+            print('\n<a name="discoveries"></a>\n')
             print("## Discoveries")
             print(markdown_table(rows=discovery_rules_dict))
 
