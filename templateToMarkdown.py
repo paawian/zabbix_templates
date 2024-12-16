@@ -262,7 +262,7 @@ def main(file):
 
             # Discovery items
             for d in discovery_rules_items_dict:
-                print('\n<a name="discovery_' + d.lower().replace(" ", "_") + '" />\n')
+                print('\n<a name="discovery_' + d.lower().replace(" ", "_") + '"></a>\n')
                 print("## Discovery " + d + "\n")
                 print("### Items" + "\n")
                 print(markdown_table(rows=discovery_rules_items_dict[d]))
